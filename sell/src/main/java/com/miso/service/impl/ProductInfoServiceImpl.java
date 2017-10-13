@@ -1,7 +1,10 @@
 package com.miso.service.impl;
 
 import com.miso.dataobject.ProductInfo;
+import com.miso.dto.CartDTO;
 import com.miso.enums.ProductStatusEnum;
+import com.miso.enums.ResultEnum;
+import com.miso.exception.SellException;
 import com.miso.repository.ProductInfoRepository;
 import com.miso.service.ProductInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +43,38 @@ public class ProductInfoServiceImpl implements ProductInfoService{
     @Override
     public ProductInfo save(ProductInfo productInfo) {
         return productInfoRepository.save(productInfo);
+    }
+
+    @Override
+    public void increaseStock(List<CartDTO> cartDTOList) {
+        for (CartDTO cartDTO:cartDTOList){
+            ProductInfo productInfo = productInfoRepository.findOne(cartDTO.getProductId());
+            if(productInfo == null){
+                throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+            }
+            Integer result = productInfo.getProductStock() + cartDTO.getProductQuantity();
+            productInfo.setProductStock(result);
+
+            productInfoRepository.save(productInfo);
+        }
+    }
+
+    @Override
+    public void decreaseStock(List<CartDTO> cartDTOList) {
+        for (CartDTO cartDTO:cartDTOList){
+            ProductInfo productInfo = productInfoRepository.findOne(cartDTO.getProductId());
+            if(productInfo == null){
+                throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+            }
+
+            Integer result = productInfo.getProductStock() - cartDTO.getProductQuantity();
+
+            if (result< 0 ){
+                throw new SellException(ResultEnum.PRODUCT_STOCK_ERROR);
+            }
+            productInfo.setProductStock(result);
+
+            productInfoRepository.save(productInfo);
+        }
     }
 }

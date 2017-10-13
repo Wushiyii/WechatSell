@@ -5,7 +5,7 @@ import com.miso.VO.ProductVO;
 import com.miso.VO.ResultVO;
 import com.miso.dataobject.ProductCategory;
 import com.miso.dataobject.ProductInfo;
-import com.miso.service.ProductCategoryService;
+import com.miso.service.CategoryService;
 import com.miso.service.ProductInfoService;
 import com.miso.utils.ResultVOUtil;
 import org.springframework.beans.BeanUtils;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,7 +29,7 @@ public class BuyerProductController {
     private ProductInfoService productInfoService;
 
     @Autowired
-    private ProductCategoryService productCategoryService;
+    private CategoryService categoryService;
 
     @GetMapping("/list")
     public ResultVO list(){
@@ -47,7 +46,7 @@ public class BuyerProductController {
         //精简做法 lamda
 
         List<Integer> categoryTypeList = productInfoList.stream().map(e -> e.getCategoryType()).collect(Collectors.toList());
-        List<ProductCategory> productCategoryList = productCategoryService.findByCategoryTypeIn(categoryTypeList);
+        List<ProductCategory> productCategoryList = categoryService.findByCategoryTypeIn(categoryTypeList);
 
         //3.拼装JSON
 

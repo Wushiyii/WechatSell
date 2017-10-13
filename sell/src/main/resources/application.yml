@@ -6,6 +6,8 @@ spring:
     password: 123456
   jpa:
     show-sql: true
+  jackson:
+    default-property-inclusion: non_null
 
 server:
   context-path: /sell
@@ -17,5 +19,6 @@ server:
 #  file: E:/var/log/tomcat/sell.log
 #  level:
 #    com.miso.LoggerTest: debug
+
 
 
