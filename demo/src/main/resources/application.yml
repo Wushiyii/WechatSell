@@ -1,0 +1,14 @@
+spring:
+    profiles:
+      active: dev
+    datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql:///springboot
+      username: root
+      password: root
+    jpa:
+      hibernate:
+        ddl-auto: update
+                  #create  每次都重新创建表与删除数据
+                  #update  首次创建表，接下来更新数据
+      show-sql: true

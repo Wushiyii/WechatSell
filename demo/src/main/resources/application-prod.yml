@@ -1,0 +1,7 @@
+server:
+  context-path: /demo
+  port: 80
+Boy:
+  height: 180
+  age: 20
+
