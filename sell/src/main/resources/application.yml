@@ -11,6 +11,7 @@ spring:
 
 server:
   context-path: /sell
+  port: 80
 #---------------application.yml  -------Using the logback
 #logging:
 #  pattern:
@@ -19,6 +20,14 @@ server:
 #  file: E:/var/log/tomcat/sell.log
 #  level:
 #    com.miso.LoggerTest: debug
+
+#配置微信平台
+wechat:
+  mpAppId: wxe97fa21bb576e886
+  mpAppSecert: 207e9d968ab51c28299bef0237952296
+#  mchId: 1409146202
+#  mchKey: c976503d34ca432c601361f969fd8d85
+#  keyPath:
 
 
 

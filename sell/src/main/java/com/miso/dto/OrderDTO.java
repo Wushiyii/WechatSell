@@ -1,10 +1,12 @@
 package com.miso.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.miso.dataobject.OrderDetail;
 import com.miso.enums.OrderStatusEnum;
 import com.miso.enums.PayStatusEnum;
+import com.miso.utils.EnumUtil;
 import com.miso.utils.serializer.Date2LongSerializer;
 import lombok.Data;
 
@@ -42,4 +44,13 @@ public class OrderDTO {
 
     private List<OrderDetail> orderDetailList;
 
+    @JsonIgnore
+    public OrderStatusEnum getOrderStatusEnum(){
+        return EnumUtil.getByCode(orderStatus,OrderStatusEnum.class);
+    }
+
+    @JsonIgnore
+    public PayStatusEnum getPayStatusEnum(){
+        return EnumUtil.getByCode(payStatus,PayStatusEnum.class);
+    }
 }

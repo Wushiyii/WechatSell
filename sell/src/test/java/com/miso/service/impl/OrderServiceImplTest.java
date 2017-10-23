@@ -31,15 +31,15 @@ public class OrderServiceImplTest {
     @Autowired
     private OrderServiceImpl orderService;
 
-    private static final String BUYER_OPENID = "123456";
+    private static final String BUYER_OPENID = "q2eaasdasd1";
     private static final String ORDER_ID = "1507738752480162108";
 
     @Test
     public void createOrder() throws Exception {
         OrderDTO orderDTO = new OrderDTO();
-        orderDTO.setBuyerName("zzzzzzzzz");
-        orderDTO.setBuyerAddress("厦门市湖里区");
-        orderDTO.setBuyerPhone("13246561322");
+        orderDTO.setBuyerName("Crown");
+        orderDTO.setBuyerAddress("Griddle");
+        orderDTO.setBuyerPhone("18921361252");
         orderDTO.setOrderId(BUYER_OPENID);
         orderDTO.setBuyerOpenid(BUYER_OPENID);
 
@@ -47,7 +47,7 @@ public class OrderServiceImplTest {
         List<OrderDetail> orderDetailList = new ArrayList<>();
         OrderDetail orderDetail = new OrderDetail();
         orderDetail.setProductId("1");
-        orderDetail.setProductQuantity(1);
+        orderDetail.setProductQuantity(50);
         orderDetailList.add(orderDetail);
 
         orderDTO.setOrderDetailList(orderDetailList);
@@ -66,6 +66,12 @@ public class OrderServiceImplTest {
     public void findAll() throws Exception {
         PageRequest pageRequest = new PageRequest(0,2);
         Page<OrderDTO> orderDTOPage = orderService.findAll(BUYER_OPENID, pageRequest);
+        System.out.println(orderDTOPage.getTotalElements());
+    }
+    @Test
+    public void findAllTest() throws Exception {
+        PageRequest pageRequest = new PageRequest(0,2);
+        Page<OrderDTO> orderDTOPage = orderService.findAll(pageRequest);
         System.out.println(orderDTOPage.getTotalElements());
     }
 

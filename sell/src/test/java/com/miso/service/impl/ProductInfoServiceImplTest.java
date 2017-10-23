@@ -59,5 +59,16 @@ public class ProductInfoServiceImplTest {
         productInfoService.save(productInfo);
 
     }
+    @Test
+    public void onsaleTest(){
+        ProductInfo productInfo = productInfoService.onSale("2");
+        System.out.println(productInfo.getProductStatusEnum().getMsg());
+    }
+
+    @Test
+    public void offsaleTest(){
+        ProductInfo productInfo = productInfoService.offSale("2");
+        System.out.println(productInfo.getProductStatusEnum().getMsg());
+    }
 
 }
